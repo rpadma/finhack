@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "601913674742",
+    "firebase_url": "https://fintech-67a5e.firebaseio.com",
+    "project_id": "fintech-67a5e",
+    "storage_bucket": "fintech-67a5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601913674742:android:74dbd6baff21e1a3",
+        "android_client_info": {
+          "package_name": "com.etuloser.padma.rohit.fintech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601913674742-ls1n7q27rvdsboth39ma4ma8e6dk92vo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.etuloser.padma.rohit.fintech",
+            "certificate_hash": "0134facf4f22dc933af19b1e737775bf8a8f557a"
+          }
+        },
+        {
+          "client_id": "601913674742-0pv12i4o5jl94naapcka0kquqd1dns3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyJwVte0YyevWaLhL9gStKi1E0W8a6c1g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "601913674742-0pv12i4o5jl94naapcka0kquqd1dns3d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
