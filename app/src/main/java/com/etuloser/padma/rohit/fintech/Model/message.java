@@ -13,8 +13,33 @@ public class message {
     private String when;
     private String type;
     private String status;
+private String tmsg;
+private String ckey;
+private String Touserkey;
 
+    public String getTouserkey() {
+        return Touserkey;
+    }
 
+    public void setTouserkey(String touserkey) {
+        Touserkey = touserkey;
+    }
+
+    public String getCkey() {
+        return ckey;
+    }
+
+    public void setCkey(String ckey) {
+        this.ckey = ckey;
+    }
+
+    public String getTmsg() {
+        return tmsg;
+    }
+
+    public void setTmsg(String tmsg) {
+        this.tmsg = tmsg;
+    }
 
     public String getType() {
         return type;

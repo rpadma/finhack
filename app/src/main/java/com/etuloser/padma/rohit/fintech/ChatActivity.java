@@ -173,19 +173,25 @@ mfConditionRef=mfRoot.child("msgs");
                         toSend.setType("1");
                         toSend.setMsg(requestamount.getText().toString()+":#"+timeperiod.getText());
                         toSend.setName(fuuser.getDisplayName());
-
+                         toSend.setTmsg("NA");
                         toSend.setWhen(String.valueOf(System.currentTimeMillis()));
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         String key1 = mConditionRef.push().getKey();
                         toSend.setMsgkey(key1);
                         toSend.setUserid(user.getUid());
-                        mConditionRef.child(key1).setValue(toSend);
+
 
                         mfRoot =  FirebaseDatabase.getInstance().getReference("users").child("user")
                                 .child(uid).child("conversations").child(fuuser.getUid());//.child("msgs");
                         String key2 = mfConditionRef.push().getKey();
+                        toSend.setCkey(key2);
+                        toSend.setTouserkey(fuuser.getUid());
+                        toSend.setUserid(uid);
+                        mConditionRef.child(key1).setValue(toSend);
 
-
+                        toSend.setUserid(uid);
+                        toSend.setTouserkey(fuuser.getUid());
+                        toSend.setCkey(key1);
                         mfConditionRef.child(key2).setValue(toSend);
 
                         chatmsg.setText("");
@@ -213,12 +219,13 @@ mfConditionRef=mfRoot.child("msgs");
                     toSend.setMsg(chatmsg.getText().toString());
                     toSend.setName(fuuser.getDisplayName());
                     toSend.setType("0");
+                    toSend.setTmsg("NA");
                     toSend.setWhen(String.valueOf(System.currentTimeMillis()));
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     String key1 = mConditionRef.push().getKey();
                     toSend.setMsgkey(key1);
                     toSend.setUserid(user.getUid());
-                    mConditionRef.child(key1).setValue(toSend);
+                    toSend.setTouserkey(uid);
 
 
 
@@ -227,7 +234,12 @@ mfConditionRef=mfRoot.child("msgs");
                             .child(uid).child("conversations").child(fuuser.getUid());//.child("msgs");
                     String key2 = mfConditionRef.push().getKey();
 
+                    toSend.setCkey(key2);
+                    mConditionRef.child(key1).setValue(toSend);
 
+                    toSend.setCkey(key1);
+                    toSend.setUserid(uid);
+                    toSend.setTouserkey(user.getUid());
                     mfConditionRef.child(key2).setValue(toSend);
 
                     chatmsg.setText("");
@@ -258,6 +270,17 @@ mfConditionRef=mfRoot.child("msgs");
 
     @Override
     public void OnMsgDeleteClick(message mo) {
+
+    }
+
+
+    public void OnAccept()
+    {
+
+    }
+
+    public void OnDecline(String fromuser,String touser, String msgid,String cmsgid)
+    {
 
     }
 }

@@ -187,8 +187,8 @@ else
 
 
 
-            Holder2 holder2 = (Holder2)holder;
-Date date=new Date(Long.valueOf(currchat.getWhen().toString()));
+            final Holder2 holder2 = (Holder2)holder;
+            Date date=new Date(Long.valueOf(currchat.getWhen().toString()));
             holder2.date.setText(p2.format(date));
           holder2.usrrname.setText(currchat.getName().toString());
 
@@ -199,7 +199,7 @@ Date date=new Date(Long.valueOf(currchat.getWhen().toString()));
                 holder2.amount.setText("Requesting "+"$"+split[0].toString());
             }
 
-            if (userid.equals(currchat.getUserid())) {
+            if (!userid.equals(currchat.getUserid())) {
                 holder2.lm.setBackgroundResource(R.drawable.you);
                 LinearLayout.LayoutParams lllp = (LinearLayout.LayoutParams) holder2.date.getLayoutParams();
                 lllp.gravity = Gravity.RIGHT;
@@ -207,6 +207,8 @@ Date date=new Date(Long.valueOf(currchat.getWhen().toString()));
                 LinearLayout.LayoutParams lllpl = (LinearLayout.LayoutParams) holder2.lm.getLayoutParams();
                 lllpl.gravity = Gravity.RIGHT;
                 holder2.date.setLayoutParams(lllpl);
+                holder2.decline.setEnabled(false);
+                holder2.accept.setEnabled(false);
 
             } else {
                 holder2.lm.setBackgroundResource(R.drawable.other);
@@ -218,13 +220,25 @@ Date date=new Date(Long.valueOf(currchat.getWhen().toString()));
                 holder2.date.setLayoutParams(lllpl);
                 holder2.usrrname.setVisibility(View.VISIBLE);
 
+
+
             }
 
 
             holder2.decline.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText((ChatActivity)mContext,"Decline",Toast.LENGTH_SHORT).show();
+
+
+
+                    holder2.decline.setEnabled(false);
+                    holder2.accept.setEnabled(false);
+
+                    holder2.transstatus.setVisibility(View.VISIBLE);
+                    holder2.transstatus.setText("Request is Declined");
+
+
+                  //  Toast.makeText((ChatActivity)mContext,"Decline",Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -232,7 +246,13 @@ Date date=new Date(Long.valueOf(currchat.getWhen().toString()));
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText((ChatActivity)mContext,"Accept",Toast.LENGTH_SHORT).show();
+
+                    holder2.decline.setEnabled(false);
+                    holder2.accept.setEnabled(false);
+                    holder2.transstatus.setVisibility(View.VISIBLE);
+                    holder2.transstatus.setText("Amount is Transferred");
+
+                   // Toast.makeText((ChatActivity)mContext,"Accept",Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -267,7 +287,7 @@ Date date=new Date(Long.valueOf(currchat.getWhen().toString()));
     }
 
     class Holder2 extends RecyclerView.ViewHolder {
-        private TextView usrrname,amount,duration,date;
+        private TextView usrrname,amount,duration,date,transstatus;
         private Button decline,accept;
         private  LinearLayout lm;
 
@@ -281,6 +301,7 @@ Date date=new Date(Long.valueOf(currchat.getWhen().toString()));
             duration=(TextView)itemView.findViewById(R.id.txtdurtion);
             decline=(Button) itemView.findViewById(R.id.btnDecline);
             accept=(Button)itemView.findViewById(R.id.btnAccept);
+            transstatus=(TextView)itemView.findViewById(R.id.transactionstatus);
 
 
 

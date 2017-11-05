@@ -15,7 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.etuloser.padma.rohit.fintech.Interface.IRetrofit;
 import com.etuloser.padma.rohit.fintech.Model.User;
+import com.etuloser.padma.rohit.fintech.RequestObjects.cobrand;
+import com.etuloser.padma.rohit.fintech.ResponseObjects.cobrandresponse;
+import com.etuloser.padma.rohit.fintech.Util.constants;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +35,12 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -186,6 +196,15 @@ public class ProfileActivity extends AppCompatActivity {
         Toast.makeText(this,"Updated Profile",Toast.LENGTH_SHORT).show();
 
         finish();
+
+    }
+
+
+    public void onSyncAccount(View v)
+    {
+
+
+
 
     }
 

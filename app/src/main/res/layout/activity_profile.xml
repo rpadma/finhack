@@ -35,7 +35,10 @@
 
                     android:onClick="saveclick"
                     ></TextView>
+
             </LinearLayout>
+
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

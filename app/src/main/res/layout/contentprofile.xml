@@ -134,6 +134,16 @@
             android:background="@android:color/darker_gray"
             android:layout_marginBottom="10dp" />
 
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sync Account"
+            android:id="@+id/SyncAccount"
+            android:onClick="onSyncAccount"
+            android:background="@color/colorAccent"
+            />
+
     </LinearLayout>
 
 
