@@ -26,9 +26,10 @@
             android:name=".MHomeActivity"
             android:label="@string/title_activity_mhome" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>

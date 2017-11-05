@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.etuloser.padma.rohit.fintech.HomeActivity;
+import com.etuloser.padma.rohit.fintech.MainActivity;
 import com.etuloser.padma.rohit.fintech.Model.User;
 import com.etuloser.padma.rohit.fintech.R;
 import com.squareup.picasso.Picasso;
@@ -59,12 +61,12 @@ public class frdadapter extends ArrayAdapter<User> {
 
 
 
-      /*  btnjoin.setOnClickListener(new View.OnClickListener() {
+        btnjoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // if(cflag==1) {
-                ((FrdActivity) mcontext).sendfrdrequest(g);
+                ((HomeActivity) mcontext).startchat(g);
                 notifyDataSetChanged();
                 //}
                 //else {
@@ -72,7 +74,7 @@ public class frdadapter extends ArrayAdapter<User> {
                 //}
             }
         });
-*/
+
 
         notifyDataSetChanged();
 

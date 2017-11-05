@@ -168,4 +168,12 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+    public void startchat(User u)
+    {
+        Intent i=new Intent(this,ChatActivity.class);
+        i.putExtra("touserid",u.getUid());
+        i.putExtra("tousername",u.getFirstname()+""+u.getLastname());
+        startActivity(i);
+
+    }
 }

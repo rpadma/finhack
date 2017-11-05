@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.etuloser.padma.rohit.fintech.Model.User;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -163,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 mProgress.setMessage("Authenticating...");
                 mProgress.show();
             }
+
 
 
 
