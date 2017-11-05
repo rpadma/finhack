@@ -2,14 +2,20 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-android:orientation="vertical"
+
+android:orientation="horizontal"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layoutreqmsg"
+    android:orientation="vertical"
     >
 
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
@@ -17,16 +23,17 @@ android:orientation="vertical"
         android:layout_marginBottom="10dp"
 android:layout_gravity="center"
         android:gravity="center"
+
         >
        <TextView
-           android:layout_width="match_parent"
+           android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:id="@+id/txtreq"
            android:text="Requesting:"
            />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtdurtion"
             android:text="Duration"
@@ -36,30 +43,54 @@ android:layout_gravity="center"
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:weightSum="1.5"
         >
         <Button
             android:layout_width="0dp"
-            android:layout_weight=".5"
+            android:layout_weight=".75"
             android:layout_height="30dp"
             android:text="Decline"
             android:id="@+id/btnDecline"
             android:layout_margin="5dp"
-            android:background="@color/colorAccent"
+            android:background="@color/colorReject"
             />
         <Button
             android:layout_width="0dp"
-            android:layout_weight=".5"
+            android:layout_weight=".75"
             android:layout_height="30dp"
             android:text="Accept"
             android:id="@+id/btnAccept"
             android:layout_margin="5dp"
-            android:background="@color/colorAccent"
+            android:background="@color/colorAccept"
             />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/userreqText"
+        android:textColor="#000000"
+        android:textSize="6dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="3dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datereqTimeText"
+        android:textSize="8dp"/>
+
+    </LinearLayout>
+</LinearLayout>
 
 </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.etuloser.padma.rohit.fintech.ChatActivity;
 import com.etuloser.padma.rohit.fintech.Model.message;
@@ -31,8 +32,7 @@ import java.util.Locale;
  * Created by Rohit on 11/4/2017.
  */
 
-public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
-
+public class chatadapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
 
     private ArrayList<message> msglist;
@@ -63,100 +63,181 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
 
     }
 
-    @Override
-    public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view = inflater.inflate(this.resourseId,parent,false);
-        return new Holder(view);
-    }
 
     @Override
-    public void onBindViewHolder(final Holder holder, int position) {
-        final message currchat = msglist.get(position);
-        DateFormat format = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        PrettyTime p2 = new PrettyTime();
-        System.out.println(p2.format(new Date()));
-
-        // holder.comments.setText(currchat.getComments().toString()+ "\n");
-        if(!currchat.getMsg().toString().equals("")) {
-            holder.date.setText(p2.format(new Date(Long.valueOf(currchat.getWhen().toString()))));
-            holder.message.setText(currchat.getMsg().toString());
-            holder.usrrname.setText(currchat.getName().toString());
-        }
-        // LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-        //       LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-        if(userid.equals(currchat.getUserid()))
-        {
-            holder.ll.setBackgroundResource(R.drawable.you);
-            LinearLayout.LayoutParams  lllp=(LinearLayout.LayoutParams)holder.date.getLayoutParams();
-            lllp.gravity= Gravity.RIGHT;
-            holder.date.setLayoutParams(lllp);
-            LinearLayout.LayoutParams  lllpl=(LinearLayout.LayoutParams)holder.ll.getLayoutParams();
-            lllpl.gravity=Gravity.RIGHT;
-            holder.date.setLayoutParams(lllpl);
-
+        if(viewType==0) {
+            View view = inflater.inflate(this.resourseId, parent, false);
+            return new Holder(view);
         }
         else
         {
-            holder.ll.setBackgroundResource(R.drawable.other);
-            LinearLayout.LayoutParams  lllp=(LinearLayout.LayoutParams)holder.date.getLayoutParams();
-            lllp.gravity=Gravity.LEFT;
-            holder.date.setLayoutParams(lllp);
-            LinearLayout.LayoutParams  lllpl=(LinearLayout.LayoutParams)holder.ll.getLayoutParams();
-            lllpl.gravity=Gravity.LEFT;
-            holder.date.setLayoutParams(lllpl);
-            holder.usrrname.setVisibility(View.VISIBLE);
-
+            View view = inflater.inflate(this.sresourceId, parent, false);
+            return new Holder2(view);
         }
 
+    }
 
+    @Override
+    public int getItemViewType(int position) {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder((ChatActivity)mContext);
-        builder.setView(R.layout.chatzoomview);
-        final AlertDialog dialog = builder.create();
+if(msglist.get(position).getType().equals("0"))
+{
+    return 0;
+}
+else
+{
+    return 1;
+}
+        //return super.getItemViewType(position);
+    }
 
-        builder.setNegativeButton("close",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(
-                            DialogInterface dialog,
-                            int whichButton) {
-                        dialog.cancel();
-                        dialog.dismiss();
-                    }
-                });
+    @Override
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        final message currchat = msglist.get(position);
 
-        holder.ll.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                itemClickCallBack.OnMsgDeleteClick(currchat);
-                notifyDataSetChanged();
+        if(currchat.getType().equals("0")) {
 
-                return false;
+            DateFormat format = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+            PrettyTime p2 = new PrettyTime();
+            System.out.println(p2.format(new Date()));
+
+            Holder holder1 = (Holder)holder;
+            // holder.comments.setText(currchat.getComments().toString()+ "\n");
+            if (!currchat.getMsg().toString().equals("")) {
+
+                holder1.date.setText(p2.format(new Date(Long.valueOf(currchat.getWhen().toString()))));
+                holder1.message.setText(currchat.getMsg().toString());
+                holder1.usrrname.setText(currchat.getName().toString());
             }
-        });
+            // LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+            //       LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            if (userid.equals(currchat.getUserid())) {
+                holder1.ll.setBackgroundResource(R.drawable.you);
+                LinearLayout.LayoutParams lllp = (LinearLayout.LayoutParams) holder1.date.getLayoutParams();
+                lllp.gravity = Gravity.RIGHT;
+                holder1.date.setLayoutParams(lllp);
+                LinearLayout.LayoutParams lllpl = (LinearLayout.LayoutParams) holder1.ll.getLayoutParams();
+                lllpl.gravity = Gravity.RIGHT;
+                holder1.date.setLayoutParams(lllpl);
+
+            } else {
+                holder1.ll.setBackgroundResource(R.drawable.other);
+                LinearLayout.LayoutParams lllp = (LinearLayout.LayoutParams) holder1.date.getLayoutParams();
+                lllp.gravity = Gravity.LEFT;
+                holder1.date.setLayoutParams(lllp);
+                LinearLayout.LayoutParams lllpl = (LinearLayout.LayoutParams) holder1.ll.getLayoutParams();
+                lllpl.gravity = Gravity.LEFT;
+                holder1.date.setLayoutParams(lllpl);
+                holder1.usrrname.setVisibility(View.VISIBLE);
+
+            }
 
 
+            final AlertDialog.Builder builder = new AlertDialog.Builder((ChatActivity) mContext);
+            builder.setView(R.layout.chatzoomview);
+            final AlertDialog dialog = builder.create();
 
-        holder.ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            builder.setNegativeButton("close",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(
+                                DialogInterface dialog,
+                                int whichButton) {
+                            dialog.cancel();
+                            dialog.dismiss();
+                        }
+                    });
+
+            holder1.ll.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    itemClickCallBack.OnMsgDeleteClick(currchat);
+                    notifyDataSetChanged();
+
+                    return false;
+                }
+            });
 
 
-                dialog.show();
-                final ImageView div=(ImageView)dialog.findViewById(R.id.cimage);
-                final TextView dtxt=(TextView)dialog.findViewById(R.id.ctext);
+            holder1.ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    dialog.show();
+                    final ImageView div = (ImageView) dialog.findViewById(R.id.cimage);
+                    final TextView dtxt = (TextView) dialog.findViewById(R.id.ctext);
 
 
                     dtxt.setVisibility(View.VISIBLE);
                     dtxt.setText(currchat.getMsg());
 
-                // Toast.makeText(v.getContext(),currchat.getMsg()+" "+currchat.getUserid(),Toast.LENGTH_SHORT).show();
-            }
-        });
+                    // Toast.makeText(v.getContext(),currchat.getMsg()+" "+currchat.getUserid(),Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else
+        {
+            DateFormat format = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+            PrettyTime p2 = new PrettyTime();
+            System.out.println(p2.format(new Date()));
 
+
+
+            Holder2 holder2 = (Holder2)holder;
+Date date=new Date(Long.valueOf(currchat.getWhen().toString()));
+            holder2.date.setText(p2.format(date));
+          holder2.usrrname.setText(currchat.getName().toString());
+
+            if(currchat.getMsg().contains(":#")) {
+                String[] split = currchat.getMsg().split(":#");
+
+                holder2.duration.setText("Duration"+split[1].toString());
+                holder2.amount.setText("Requesting "+"$"+split[0].toString());
+            }
+
+            if (userid.equals(currchat.getUserid())) {
+                holder2.lm.setBackgroundResource(R.drawable.you);
+                LinearLayout.LayoutParams lllp = (LinearLayout.LayoutParams) holder2.date.getLayoutParams();
+                lllp.gravity = Gravity.RIGHT;
+                holder2.date.setLayoutParams(lllp);
+                LinearLayout.LayoutParams lllpl = (LinearLayout.LayoutParams) holder2.lm.getLayoutParams();
+                lllpl.gravity = Gravity.RIGHT;
+                holder2.date.setLayoutParams(lllpl);
+
+            } else {
+                holder2.lm.setBackgroundResource(R.drawable.other);
+                LinearLayout.LayoutParams lllp = (LinearLayout.LayoutParams) holder2.date.getLayoutParams();
+                lllp.gravity = Gravity.LEFT;
+                holder2.date.setLayoutParams(lllp);
+                LinearLayout.LayoutParams lllpl = (LinearLayout.LayoutParams) holder2.lm.getLayoutParams();
+                lllpl.gravity = Gravity.LEFT;
+                holder2.date.setLayoutParams(lllpl);
+                holder2.usrrname.setVisibility(View.VISIBLE);
+
+            }
+
+
+            holder2.decline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText((ChatActivity)mContext,"Decline",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            holder2.accept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText((ChatActivity)mContext,"Accept",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+        }
 
     }
 
@@ -173,9 +254,6 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
     {
         private TextView usrrname,message,date;
         private LinearLayout ll;
-
-
-
 
         public Holder(View itemView) {
             super(itemView);
@@ -196,14 +274,15 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
         public Holder2(View itemView) {
         super(itemView);
 
-            usrrname = (TextView) itemView.findViewById(R.id.userText);
-            date = (TextView) itemView.findViewById(R.id.dateTimeText);
-            amount = (TextView) itemView.findViewById(R.id.txtreq);
-            duration = (TextView) itemView.findViewById(R.id.txtdurtion);
-
-            decline=(Button)itemView.findViewById(R.id.btnDecline);
+            usrrname = (TextView) itemView.findViewById(R.id.userreqText);
+           date = (TextView) itemView.findViewById(R.id.datereqTimeText);
+            lm=(LinearLayout)itemView.findViewById(R.id.layoutreqmsg);
+            amount=(TextView)itemView.findViewById(R.id.txtreq);
+            duration=(TextView)itemView.findViewById(R.id.txtdurtion);
+            decline=(Button) itemView.findViewById(R.id.btnDecline);
             accept=(Button)itemView.findViewById(R.id.btnAccept);
-            lm=(LinearLayout)itemView.findViewById(R.id.layoutmsg);
+
+
 
         }
     }
