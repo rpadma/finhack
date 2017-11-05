@@ -54,7 +54,7 @@ public class frdadapter extends ArrayAdapter<User> {
 
         ImageView iv=(ImageView)convertView.findViewById(R.id.frddp);
         TextView txtroomname=(TextView)convertView.findViewById(R.id.tempfrdname);
-        final Button btnjoin=(Button)convertView.findViewById(R.id.tempchat);
+        ImageView btnjoin=(ImageView) convertView.findViewById(R.id.tempchat);
 
         txtroomname.setText(g.getFirstname()+" "+g.getLastname());
         Picasso.with(mcontext).load(g.getImgurl()).placeholder(R.drawable.avatar_11_raster).into(iv);

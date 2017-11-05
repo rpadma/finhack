@@ -2,14 +2,18 @@ package com.etuloser.padma.rohit.fintech;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.etuloser.padma.rohit.fintech.Model.User;
 import com.etuloser.padma.rohit.fintech.Model.message;
@@ -81,7 +85,7 @@ public class ChatActivity extends AppCompatActivity implements chatadapter.ItemC
 
         username = (TextView)findViewById(R.id.textViewUser);
         fuuser = FirebaseAuth.getInstance().getCurrentUser();
-        username.setText(fuuser.getDisplayName());
+        username.setText(uname);
         recyclerView = (RecyclerView) findViewById(R.id.container);
         LinearLayoutManager llm=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         llm.setStackFromEnd(true);
@@ -140,14 +144,58 @@ mfConditionRef=mfRoot.child("msgs");
         bntGal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  Intent intent = new  Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType("image/*");
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(intent, REQUEST_IMAGE_GET);
-                }
-*/
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+                builder.setView(R.layout.reqlayout);
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                final EditText requestamount=(EditText)dialog.findViewById(R.id.add_reqamt);
+                final EditText timeperiod=(EditText)dialog.findViewById(R.id.add_timeperiod);
+                Button btncancel=(Button)dialog.findViewById(R.id.atcancel);
+                Button btnsendrequest=(Button)dialog.findViewById(R.id.btnrequest);
+
+
+                btncancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        dialog.hide();
+                    }
+                });
+
+                btnsendrequest.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        message toSend = new message();
+                        toSend.setStatus("requested");
+                        toSend.setType("1");
+                        toSend.setMsg(requestamount.getText().toString()+":#"+timeperiod.getText());
+                        toSend.setName(fuuser.getDisplayName());
+
+                        toSend.setWhen(String.valueOf(System.currentTimeMillis()));
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        String key1 = mConditionRef.push().getKey();
+                        toSend.setMsgkey(key1);
+                        toSend.setUserid(user.getUid());
+                        mConditionRef.child(key1).setValue(toSend);
+
+                        mfRoot =  FirebaseDatabase.getInstance().getReference("users").child("user")
+                                .child(uid).child("conversations").child(fuuser.getUid());//.child("msgs");
+                        String key2 = mfConditionRef.push().getKey();
+
+
+                        mfConditionRef.child(key2).setValue(toSend);
+
+                        chatmsg.setText("");
+
+                        dialog.hide();
+                    }
+                });
+
+
+
             }
         });
 
@@ -164,7 +212,7 @@ mfConditionRef=mfRoot.child("msgs");
                     message toSend = new message();
                     toSend.setMsg(chatmsg.getText().toString());
                     toSend.setName(fuuser.getDisplayName());
-
+                    toSend.setType("0");
                     toSend.setWhen(String.valueOf(System.currentTimeMillis()));
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     String key1 = mConditionRef.push().getKey();
@@ -202,7 +250,7 @@ mfConditionRef=mfRoot.child("msgs");
         ArrayList<message> msglist=new ArrayList<message>();
         msglist.addAll(allChats);
         if(msglist.size()>0) {
-            chatAdapter = new chatadapter(allChats, this, R.layout.chat_item, fuuser.getUid());
+            chatAdapter = new chatadapter(allChats, this, R.layout.chat_item,R.layout.chatreq ,fuuser.getUid());
             chatAdapter.notifyDataSetChanged();
             recyclerView.setAdapter(chatAdapter);
         }

@@ -15,7 +15,9 @@ public class User implements Serializable{
     private String email;
     private String uid;
     private String key;
-
+    private String rating;
+    private String type;
+    private String creditlevel;
 
     @Override
     public String toString() {
@@ -27,9 +29,35 @@ public class User implements Serializable{
                 ", email='" + email + '\'' +
                 ", uid='" + uid + '\'' +
                 ", key='" + key + '\'' +
+                ", rating='" + rating + '\'' +
+                ", type='" + type + '\'' +
+                ", creditlevel='" + creditlevel + '\'' +
                 '}';
     }
 
+    public String getCreditlevel() {
+        return creditlevel;
+    }
+
+    public void setCreditlevel(String creditlevel) {
+        this.creditlevel = creditlevel;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
     public String getKey() {
         return key;

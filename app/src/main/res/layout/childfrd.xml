@@ -6,8 +6,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
         android:background="@drawable/box"
         android:weightSum="10"
         >
@@ -22,8 +22,8 @@
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/frddp"
                 android:clickable="true"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
                 app:border_width="1dp"
                 app:border_color="#FF000000"
@@ -39,6 +39,7 @@
             android:layout_weight="4"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_margin="10dp"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -55,28 +56,34 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
+            android:layout_gravity="center"
+            android:gravity="center"
             >
+
 
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:layout_gravity="center"
                 android:gravity="center"
+
                 >
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:text="chat"
+                <ImageView
                     android:id="@+id/tempchat"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:gravity="center"
-                    android:background="@color/colorAccent"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icha" />
 
-                    />
-            </LinearLayout>
+
+
+
+</LinearLayout>
+
 
         </LinearLayout>
 

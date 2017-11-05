@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
     private ArrayList<message> msglist;
     private LayoutInflater inflater;
     private int resourseId;
+    private int sresourceId;
     private Context mContext;
     private  String userid;
 
@@ -49,11 +51,12 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
     }
 
 
-    public chatadapter(ArrayList<message> weathersData, Context context, int resourseId, String userID)
+    public chatadapter(ArrayList<message> weathersData, Context context, int resourseId, int srequestid, String userID)
     {
         this.inflater = LayoutInflater.from(context);
         this.msglist = weathersData;
         this.resourseId = resourseId;
+        this.sresourceId=srequestid;
         this.mContext = context;
         this.userid = userID;
         this.itemClickCallBack = (ItemClickCallBack) context;
@@ -185,4 +188,24 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
 
     }
 
-}
+    class Holder2 extends RecyclerView.ViewHolder {
+        private TextView usrrname,amount,duration,date;
+        private Button decline,accept;
+        private  LinearLayout lm;
+
+        public Holder2(View itemView) {
+        super(itemView);
+
+            usrrname = (TextView) itemView.findViewById(R.id.userText);
+            date = (TextView) itemView.findViewById(R.id.dateTimeText);
+            amount = (TextView) itemView.findViewById(R.id.txtreq);
+            duration = (TextView) itemView.findViewById(R.id.txtdurtion);
+
+            decline=(Button)itemView.findViewById(R.id.btnDecline);
+            accept=(Button)itemView.findViewById(R.id.btnAccept);
+            lm=(LinearLayout)itemView.findViewById(R.id.layoutmsg);
+
+        }
+    }
+
+    }
