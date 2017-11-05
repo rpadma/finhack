@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,7 +80,6 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
             holder.date.setText(p2.format(new Date(Long.valueOf(currchat.getWhen().toString()))));
             holder.message.setText(currchat.getMsg().toString());
             holder.usrrname.setText(currchat.getName().toString());
-            holder.icon.setVisibility(View.INVISIBLE);
         }
         // LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
         //       LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -93,8 +93,6 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
             LinearLayout.LayoutParams  lllpl=(LinearLayout.LayoutParams)holder.ll.getLayoutParams();
             lllpl.gravity=Gravity.RIGHT;
             holder.date.setLayoutParams(lllpl);
-
-
 
         }
         else
@@ -110,12 +108,7 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
 
         }
 
-        if(!currchat.getMimgurl().equals("NA")) {
-            Picasso.with(mContext).load(currchat.getMimgurl()).resize(200,200).placeholder(R.mipmap.ic_launcher).into(holder.icon);
-            holder.date.setText(p2.format(new Date(Long.valueOf(currchat.getWhen().toString()))));
-            holder.icon.setVisibility(View.VISIBLE);
-            holder.usrrname.setText(currchat.getName().toString());
-        }
+
 
         final AlertDialog.Builder builder = new AlertDialog.Builder((ChatActivity)mContext);
         builder.setView(R.layout.chatzoomview);
@@ -153,17 +146,9 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
                 final ImageView div=(ImageView)dialog.findViewById(R.id.cimage);
                 final TextView dtxt=(TextView)dialog.findViewById(R.id.ctext);
 
-                if(!currchat.getMimgurl().equals("NA"))
 
-                {
-                    div.setVisibility(View.VISIBLE);
-                    Picasso.with(v.getContext()).load(currchat.getMimgurl()).fit().into(div);
-                }
-                else
-                {
                     dtxt.setVisibility(View.VISIBLE);
                     dtxt.setText(currchat.getMsg());
-                }
 
                 // Toast.makeText(v.getContext(),currchat.getMsg()+" "+currchat.getUserid(),Toast.LENGTH_SHORT).show();
             }
@@ -184,7 +169,6 @@ public class chatadapter  extends RecyclerView.Adapter<chatadapter.Holder>{
     class Holder extends RecyclerView.ViewHolder
     {
         private TextView usrrname,message,date;
-        private ImageView icon;
         private LinearLayout ll;
 
 

@@ -7,7 +7,6 @@ package com.etuloser.padma.rohit.fintech.Model;
 public class message {
 
     private String msg;
-    private String mimgurl;
     private String userid;
     private String msgkey;
     private String name;
@@ -36,14 +35,6 @@ public class message {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public String getMimgurl() {
-        return mimgurl;
-    }
-
-    public void setMimgurl(String mimgurl) {
-        this.mimgurl = mimgurl;
     }
 
     public String getUserid() {
